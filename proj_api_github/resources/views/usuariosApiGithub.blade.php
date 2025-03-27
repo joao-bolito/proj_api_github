@@ -30,6 +30,13 @@
                 })
                 .catch(e => {
                     console.log(e);
+                    ul.innerHTML = ''
+
+                    let li = document.createElement('li')
+                    li.classList.add('m-10')
+                    li.innerHTML = `<strong>Erro ao buscar o usuário!</strong>`
+
+                    ul.appendChild(li)
                 })
         }
     </script>
