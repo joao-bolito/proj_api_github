@@ -4,30 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script defer>
+    <link rel="stylesheet" href="{{asset('listarUsuario.css')}}">
+    {{-- <script defer>
         function getApi(){
             const ul = document.querySelector('ul')
             ul.innerHTML = ''
             const user = document.querySelector('#user').value
 
-            fetch(`https://api.github.com/users/${user}/repos`)
+            fetch(`https://api.github.com/users/${user}`)
                 .then(async resposta => {
+                    if (!resposta.ok) {
+                        throw new Error("Usuário não encontrado");
+                    }
 
                     let data = await resposta.json()
 
-                    data.map(item => {
-                        let li = document.createElement('li')
-                        li.classList.add('m-10')
+                    let li = document.createElement('li')
+                    li.classList.add('m-10')
 
-                        li.innerHTML = `<strong>${item.name}</strong>`  // Aqui, você insere o nome do repositório.
+                    // li.innerHTML = `<strong>${item.name}</strong>`  // Aqui, você insere o nome do repositório.
 
-                        ul.appendChild(li)
+                    li.innerHTML = `
+                        <img src="${data.avatar_url}" alt="Avatar" width="80" style="border-radius: 50%;">
+                        <strong>${data.name || "Nome não disponível"}</strong> <br>
+                        <em>@${data.login}</em> <br>
+                        <p>${data.bio || "Sem biografia"}</p>
+                        <a href="${data.html_url}" target="_blank">Perfil no GitHub</a>
+                    `;
 
-                        // Se você quiser adicionar uma linha horizontal entre os itens, pode fazer assim:
-                        let hr = document.createElement('hr')
-                        ul.appendChild(hr)
+                    ul.appendChild(li)
+
+                    // Se você quiser adicionar uma linha horizontal entre os itens, pode fazer assim:
+                    let hr = document.createElement('hr')
+                    ul.appendChild(hr)
                     })
-                })
                 .catch(e => {
                     console.log(e);
                     ul.innerHTML = ''
@@ -39,47 +49,28 @@
                     ul.appendChild(li)
                 })
         }
-    </script>
+    </script> --}}
     <title>Lista de Usuários</title>
-
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-
-        body{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        hr{
-            width: 50vw;
-            margin: 10px;
-        }
-
-        .m-10{
-            margin: 10px;
-        }
-
-        li{
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
 </head>
 <body>
     <h1 class="m-10">Github API</h1>
-    <div>
+    <form action="{{route('listarusuarios')}}">
         <label for="">Nome do Usuário</label>
-        <input type="text" id="user">
+        <input type="text" id="user" name="user">
         <button onclick="getApi()">Buscar</button>
-    </div>
+    </form>
     <hr>
-    <ul class="m-10">
+    {{-- <ul class="m-10">
 
-    </ul>
+    </ul> --}}
+
+    <div class="card-user">
+        <img src="{{$response['avatar_url']}}" alt="" style="width: 80px; height: 80px; border-radius: 50%;">
+        <p>{{$response['name']}}</p>
+        <p>@ {{$response['login']}}</p>
+        <a href="{{$response['html_url']}}" target="_blank">Perfil no GitHub</a>
+    </div>
+    <button>Salvar na lista</button>
 
 </body>
 </html>

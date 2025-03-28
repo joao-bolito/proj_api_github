@@ -24,6 +24,6 @@ Route::get('/login', [loginController::class, 'login'])->name('login');
 
 Route::get('/listarAdmins', [listarAdminsController::class, 'listarAdmins'])->name('listarAdmins');
 
-Route::get('/usuariosApiGithub', [listaUsuariosController::class, 'listaUsuario']);
+Route::get('/usuariosApiGithub/{user?}', [listaUsuariosController::class, 'listaUsuario'])->name('listarusuarios');
 
 
