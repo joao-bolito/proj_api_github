@@ -11,12 +11,14 @@
     <main class="pesquisa-usuario">
         <h1 class="m-10">Buscar usuário Github</h1>
         <form action="{{route('listarusuarios')}}">
-            <label for="">Nome do Usuário</label>
-            <input type="text" id="user" name="user">
-            <button onclick="getApi()">Buscar</button>
+            <input type="text" id="user" name="user" class="input-pesquisa">
+            <button class="btn-buscar">Buscar</button>
         </form>
     </main>
-    <hr>
+
+    @if(session('error'))
+        <p>{{session('error') }}</p>
+    @endif
 
     {{-- Verifica se tem requisição, se tiver ele traz, se não, ele mostra a mensagem --}}
     @if(request()->has('user') && isset($response))
@@ -28,10 +30,15 @@
             <p>@ {{$response['login'] ?? 'Login não disponível'}}</p>
             <a href="{{$response['html_url'] ?? '#'}}" target="_blank">Perfil no GitHub</a>
         </div>
-        <button>Salvar na lista</button>
     @else
         <p>Busque um usuário</p>
     @endif
+
+    {{-- criando lista de usuários pesquisados --}}
+    <div class="container">
+        <h1>Lista de pesquisa de usuário:</h1>
+        <ul class="listaUsuario"></ul>
+    </div>
 
 
 </body>
