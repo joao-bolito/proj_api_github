@@ -1,6 +1,16 @@
 *{
     margin: 0;
     padding: 0;
+    background-color: #161c3a;
+    color: white;
+}
+
+.pesquisa-usuario{
+    background-color: #2b3566;
+    padding: 2em;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 body{
@@ -15,6 +25,7 @@ hr{
 }
 
 .m-10{
+    background-color: #2b3566;
     margin: 10px;
 }
 

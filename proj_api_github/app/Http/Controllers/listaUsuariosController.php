@@ -10,8 +10,6 @@ class listaUsuariosController extends Controller
 
         $response = Http::get("https://api.github.com/users/{$request->user}");
 
-        // return $response;
-
         return view('usuariosApiGithub', compact("response"));
     }
 
