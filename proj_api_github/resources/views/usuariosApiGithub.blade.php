@@ -9,8 +9,11 @@
 </head>
 <body>
     <main class="pesquisa-usuario">
+        <h1>Seja Bem-Vindo!</h1>
+        <h2>{{session('nome');}}</h2>
         <h1 class="m-10">Buscar usuário Github</h1>
-        <form action="{{route('listarusuarios')}}">
+        <form action="{{route('cadastrarPesquisaUser')}}" method="POST">
+            @csrf
             <input type="text" id="user" name="user" class="input-pesquisa">
             <button class="btn-buscar">Buscar</button>
         </form>

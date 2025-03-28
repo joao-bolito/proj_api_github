@@ -16,14 +16,13 @@ class registrarController extends Controller
 
         $admins = new Admin;
 
-        // dd($admins);die;
-
         $admins->nome = $request->nome;
         $admins->email = $request->email;
         $admins->senha = bcrypt($request->senha);
 
         $admins->save();
 
+        session(['nome' => $admins->nome], ['id' => $admins->id]);
         return redirect('/usuariosApiGithub');
     }
 }

@@ -24,6 +24,8 @@ Route::get('/login', [loginController::class, 'login'])->name('login');
 
 Route::get('/listarAdmins', [listarAdminsController::class, 'listarAdmins'])->name('listarAdmins');
 
-Route::get('/usuariosApiGithub/{user?}', [listaUsuariosController::class, 'listaUsuario'])->name('listarusuarios');
+Route::get('/usuariosApiGithub', [listaUsuariosController::class, 'listaUsuario'])->name('listarusuarios');
+Route::post('/usuariosApiGithub', [listaUsuariosController::class, 'store'])->name('cadastrarPesquisaUser');
+
 
 

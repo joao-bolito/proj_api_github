@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
+use App\Models\User_pesquisado;
 
 class listaUsuariosController extends Controller
 {
@@ -18,6 +19,29 @@ class listaUsuariosController extends Controller
 
 
         return view('usuariosApiGithub', compact("response"));
+    }
+
+
+    public function store(Request $request){
+
+        $dadoUsuario = Http::get("https://api.github.com/users/{$request->user}");
+
+        $userPesquisado = new User_pesquisado;
+
+
+
+        $userPesquisado->nameAdmin = session('nome');
+        $userPesquisado->usuarioPesquisado = $request->input('user');
+
+        if($dadoUsuario['login'] == $request->input('user')){
+            $userPesquisado->save();
+        }
+
+
+
+
+
+        return redirect()->route('listarusuarios', ['user' => $request->input('user')]);
     }
 
 
