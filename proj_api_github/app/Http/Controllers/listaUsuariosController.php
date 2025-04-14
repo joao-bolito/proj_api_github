@@ -29,17 +29,14 @@ class listaUsuariosController extends Controller
         $userPesquisado = new User_pesquisado;
 
 
+        $userPesquisado->nameAdmin = (string)session('nome');
+        $userPesquisado->usuarioPesquisado = trim((string)$request->input('user'));
 
-        $userPesquisado->nameAdmin = session('nome');
-        $userPesquisado->usuarioPesquisado = $request->input('user');
+        $request->validate([
+            'user' => 'required|string|max:255'
+        ]);
 
-        if($dadoUsuario['login'] == $request->input('user')){
-            $userPesquisado->save();
-        }
-
-
-
-
+        $userPesquisado->save();
 
         return redirect()->route('listarusuarios', ['user' => $request->input('user')]);
     }
